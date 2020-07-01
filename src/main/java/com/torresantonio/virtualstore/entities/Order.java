@@ -20,7 +20,7 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codOrder;
 	
-	private String nameProd;
+	private String quantProd;
 	private double totalPrice;
 	
 	@ManyToOne
@@ -31,10 +31,10 @@ public class Order implements Serializable {
 
 	}
 
-	public Order(long codOrder, String nameProd, double totalPrice, Client client) {
+	public Order(long codOrder, String quantProd, double totalPrice, Client client) {
 		super();
 		this.codOrder = codOrder;
-		this.nameProd = nameProd;
+		this.quantProd = quantProd;
 		this.totalPrice = totalPrice;
 		this.client = client;
 	}
@@ -47,12 +47,12 @@ public class Order implements Serializable {
 		this.codOrder = codOrder;
 	}
 
-	public String getnameProd() {
-		return nameProd;
+	public String getquantProd() {
+		return quantProd;
 	}
 
-	public void setnameProd(String nameProd) {
-		this.nameProd = nameProd;
+	public void setquantProd(String quantProd) {
+		this.quantProd = quantProd;
 	}
 
 	public double getTotalPrice() {
