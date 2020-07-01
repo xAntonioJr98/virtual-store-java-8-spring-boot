@@ -1,12 +1,17 @@
 package com.torresantonio.virtualstore.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="TB_Product")
@@ -21,6 +26,10 @@ public class Product implements Serializable {
 	private String descProd;
 	private Double price;
 	private String imgUrl;
+	
+	
+	@OneToMany(mappedBy ="id.product")
+	private Set<OrderItem> items = new HashSet<>();
 	
 	public Product() {
 		
@@ -73,6 +82,14 @@ public class Product implements Serializable {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+	@JsonIgnore
+	public Set<Order> getOrders(){
+		Set<Order> set = new HashSet<>();
+		for(OrderItem x : items) {
+			set.add(x.getOrder());
+		}
+		return set;
 	}
 
 	@Override
