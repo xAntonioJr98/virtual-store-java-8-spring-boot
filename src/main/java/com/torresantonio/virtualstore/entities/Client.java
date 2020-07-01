@@ -1,19 +1,24 @@
 package com.torresantonio.virtualstore.entities;
 
 import java.io.Serializable;
-//import java.util.ArrayList;
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.OneToMany;
-//import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+//json ignore para n acontecer de cair em um loop nas associações
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 
 @Entity
-//@Table(name = "TB_Client")
+@Table(name = "TB_Client")
 public class Client implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,9 +31,10 @@ public class Client implements Serializable {
 	private String phone;
 	private String password;
 	
-	//@OneToMany(mappedBy="client")
+	@JsonIgnore
+	@OneToMany(mappedBy="client")
 	
-	//private List<Order> orders = new ArrayList<>();
+	private List<Order> orders = new ArrayList<>();
 
 	public Client() {
 
@@ -83,10 +89,10 @@ public class Client implements Serializable {
 		this.password = password;
 	}
 
-	/*public List<Order> getOrders() {
+	public List<Order> getOrders() {
 		return orders;
 	}
-*/
+
 
 	@Override
 	public int hashCode() {
