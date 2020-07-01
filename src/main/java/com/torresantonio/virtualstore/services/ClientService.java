@@ -27,4 +27,7 @@ public class ClientService {
 	public Client insert(Client obj) {
 		return repository.save(obj);
 	}
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
