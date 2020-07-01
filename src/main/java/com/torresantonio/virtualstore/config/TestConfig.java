@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Profile;
 
 import com.torresantonio.virtualstore.entities.Client;
 import com.torresantonio.virtualstore.entities.Order;
+import com.torresantonio.virtualstore.entities.OrderItem;
 import com.torresantonio.virtualstore.entities.Product;
 import com.torresantonio.virtualstore.repositories.ClientRepository;
+import com.torresantonio.virtualstore.repositories.OrderItemRepository;
 import com.torresantonio.virtualstore.repositories.OrderRepository;
 import com.torresantonio.virtualstore.repositories.ProductRepository;
 
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -41,9 +46,18 @@ public class TestConfig implements CommandLineRunner {
 		Product prod2 = new Product(2L, "Camiseta", "Roupas",19.90, "teste");
 		Product prod3 = new Product(3L, "Bone", "Roupas",89.90, "teste");
 		
+		OrderItem oi1 = new OrderItem(ord1, prod1, 2, prod1.getPrice());
+		OrderItem oi2 = new OrderItem(ord1, prod3, 4, prod3.getPrice());
+		OrderItem oi3 = new OrderItem(ord2, prod2, 5, prod2.getPrice());
+		OrderItem oi4 = new OrderItem(ord2, prod3, 6, prod3.getPrice());
+		
+		
 		clientRepository.saveAll(Arrays.asList(cli1, cli2));
 		orderRepository.saveAll(Arrays.asList(ord1, ord2));
 		productRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		
 		
 		
 		
